@@ -11,12 +11,13 @@ module Lita
         "exchange [FROM] [TO]" => "Show exchange rate FROM for TO",
       })
 
-      def list_currencies
+      def list_currencies(chat)
         chat.reply "#{currencies}"
       end
 
-      def exchange(resp)
-        from, to = resp.matches[0][1].split(" ").map{|x| x.upcase} 
+      def exchange(chat)
+        from, to = chat.matches[0][1].split(" ").map{|x| x.upcase} 
+        chat.reply "#{from} -> #{to}"
       end
 
       private 
