@@ -27,6 +27,7 @@ module Lita
         currencies_api_url = "https://openexchangerates.org/api/currencies.json"
         req = http.get(currencies_api_url, app_id: config.app_id)
         currencies = MultiJson.load(req.body)
+        currencies
       end
 
       def convert(from, to)
@@ -42,7 +43,7 @@ module Lita
         req = http.get(latest_exchange_rate_api_url, app_id: config.app_id)
         exchange_rates = MultiJson.load(req.body)
 
-        exchange_rates[from] / exchange_rates[to]
+        exchange_rates['rates'][from] / exchange_rates['rates'][to]
       end
 
       Lita.register_handler(self)
