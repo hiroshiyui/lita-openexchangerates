@@ -1,11 +1,11 @@
 Gem::Specification.new do |spec|
   spec.name          = "lita-openexchangerates"
-  spec.version       = "0.1.2"
+  spec.version       = "0.1.3"
   spec.authors       = ["Hiroshi Yui"]
   spec.email         = ["hiroshiyui@kkbox.com"]
   spec.description   = "Lita handler for Open Exchange Rates (https://openexchangerates.org/)"
   spec.summary       = "Lita handler for Open Exchange Rates (https://openexchangerates.org/)"
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/hiroshiyui/lita-openexchangerates"
   spec.license       = "MIT"
   spec.metadata      = { "lita_plugin_type" => "handler" }
 
