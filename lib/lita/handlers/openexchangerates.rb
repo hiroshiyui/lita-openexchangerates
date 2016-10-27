@@ -8,7 +8,7 @@ module Lita
       })
 
       route(/^exchange\s(.*)$/, :exchange, command: true, help: {
-        "exchange [FROM] [TO]" => "Show exchange rate FROM for TO",
+        "exchange FROM TO" => "Show exchange rate FROM for TO",
       })
 
       def list_currencies(chat)
@@ -18,7 +18,8 @@ module Lita
 
       def exchange(chat)
         from, to = chat.matches[0][0].split(" ").map{|x| x.upcase} 
-        chat.reply "#{from} -> #{to}"
+        exchange_rate = convert(from, to)
+        chat.reply "#{from} -> #{to}: #{exchange_rate}"
       end
 
       private 
@@ -29,9 +30,20 @@ module Lita
       end
 
       def convert(from, to)
+        valid_currencies = currencies.collect {|currency, comment| currency}
+
+        [from, to].each do |currency_code|
+          unless valid_currencies.include?(currency_code)
+            chat.reply "Invalid currency code, please use 'currencies' for a valid list!"
+            return
+          end
+        end
+
         latest_exchange_rate_api_url = "https://openexchangerates.org/api/latest.json"
         req = http.get(latest_exchange_rate_api_url, app_id: config.app_id)
         exchange_rates = MultiJson.load(req.body)
+
+        exchange_rates[from].to_f / exchange_rates[to].to_f
       end
 
       Lita.register_handler(self)
