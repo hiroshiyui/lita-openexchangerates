@@ -16,11 +16,8 @@ module Lita
       end
 
       def exchange(chat)
-        input = chat.matches[0][1].split(" ")
-        chat.reply "#{input}"
-        #cron_expression = input[0..4].join(" ")
-        #from, to = chat.matches[0][1].split(" ").map{|x| x.upcase} 
-        #chat.reply "#{from} -> #{to}"
+        from, to = chat.matches[0][0].split(" ").map{|x| x.upcase} 
+        chat.reply "#{from} -> #{to}"
       end
 
       private 
