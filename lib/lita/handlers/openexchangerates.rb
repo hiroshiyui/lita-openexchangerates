@@ -43,7 +43,9 @@ module Lita
         req = http.get(latest_exchange_rate_api_url, app_id: config.app_id)
         exchange_rates = MultiJson.load(req.body)
 
-        exchange_rates[from].to_f / exchange_rates[to].to_f
+        chat.reply("#{exchange_rates[from]} #{exchange_rates[to]}")
+
+        exchange_rates[from] / exchange_rates[to]
       end
 
       Lita.register_handler(self)
