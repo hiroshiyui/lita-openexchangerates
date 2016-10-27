@@ -12,7 +12,8 @@ module Lita
       })
 
       def list_currencies(chat)
-        chat.reply "#{currencies}"
+        response = currencies.map {|currency, comment| "* #{currency}: #{comment}"}.join("\n")
+        chat.reply "#{response}"
       end
 
       def exchange(chat)
