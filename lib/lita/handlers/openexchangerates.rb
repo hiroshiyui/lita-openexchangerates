@@ -34,16 +34,13 @@ module Lita
 
         [from, to].each do |currency_code|
           unless valid_currencies.include?(currency_code)
-            log "Invalid currency code, please use 'currencies' for a valid list!"
-            return
+            return "Invalid currency code, please use 'currencies' for a valid list!"
           end
         end
 
         latest_exchange_rate_api_url = "https://openexchangerates.org/api/latest.json"
         req = http.get(latest_exchange_rate_api_url, app_id: config.app_id)
         exchange_rates = MultiJson.load(req.body)
-
-        log "#{exchange_rates[from]} / #{exchange_rates[to]}"
 
         exchange_rates[from] / exchange_rates[to]
       end
