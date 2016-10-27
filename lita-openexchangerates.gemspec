@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "lita-openexchangerates"
-  spec.version       = "0.1.1"
+  spec.version       = "0.1.2"
   spec.authors       = ["Hiroshi Yui"]
   spec.email         = ["hiroshiyui@kkbox.com"]
   spec.description   = "Lita handler for Open Exchange Rates (https://openexchangerates.org/)"
