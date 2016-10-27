@@ -34,7 +34,7 @@ module Lita
 
         [from, to].each do |currency_code|
           unless valid_currencies.include?(currency_code)
-            chat.reply "Invalid currency code, please use 'currencies' for a valid list!"
+            log "Invalid currency code, please use 'currencies' for a valid list!"
             return
           end
         end
@@ -43,7 +43,7 @@ module Lita
         req = http.get(latest_exchange_rate_api_url, app_id: config.app_id)
         exchange_rates = MultiJson.load(req.body)
 
-        chat.reply("#{exchange_rates[from]} #{exchange_rates[to]}")
+        log "#{exchange_rates[from]} / #{exchange_rates[to]}"
 
         exchange_rates[from] / exchange_rates[to]
       end
